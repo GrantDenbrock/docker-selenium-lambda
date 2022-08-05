@@ -9,8 +9,18 @@ FROM public.ecr.aws/lambda/python@sha256:ce32e747dd996dc402c3a68ac5ce3ac116ab470
 RUN yum install atk cups-libs gtk3 libXcomposite alsa-lib \
     libXcursor libXdamage libXext libXi libXrandr libXScrnSaver \
     libXtst pango at-spi2-atk libXt xorg-x11-server-Xvfb \
-    xorg-x11-xauth dbus-glib dbus-glib-devel -y
+    xorg-x11-xauth dbus-glib dbus-glib-devel -y \
+
 RUN pip install selenium
+RUN pip install requests
+RUN pip install retrying
+RUN pip install boto3
+RUN pip install pandas
+RUN pip install numpy
+RUN pip install openpyxl
+RUN pip install pymysql
+
+
 COPY --from=build /opt/chrome-linux /opt/chrome
 COPY --from=build /opt/chromedriver /opt/
 COPY main.py ./
